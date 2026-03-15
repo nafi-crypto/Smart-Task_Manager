@@ -316,6 +316,3 @@ npm install
 - ✅ Fully persistent with MongoDB
 - ✅ RESTful Spring Boot API
 - ✅ Optimistic UI updates
-#   S m a r t - T a s k - M a n a g e r  
- #   S m a r t - T a s k - M a n a g e r  
- 
