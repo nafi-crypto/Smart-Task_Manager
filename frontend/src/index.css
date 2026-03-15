@@ -1,0 +1,245 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg-primary: #0d1117;
+  --bg-surface: #161b22;
+  --bg-card: #21262d;
+  --bg-hover: #30363d;
+  --border-color: #30363d;
+  --border-subtle: #21262d;
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #484f58;
+  --accent-blue: #1f6feb;
+  --accent-blue-hover: #388bfd;
+  --accent-green: #238636;
+  --accent-orange: #d29922;
+  --accent-red: #da3633;
+  --accent-purple: #8957e5;
+  --scrollbar-thumb: #30363d;
+  --scrollbar-track: transparent;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #484f58; }
+
+/* Drag and Drop */
+.dnd-dragging {
+  box-shadow: 0 12px 40px rgba(0,0,0,0.7) !important;
+  transform: rotate(2deg) !important;
+  opacity: 0.95 !important;
+  cursor: grabbing !important;
+}
+
+.column-dragging {
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7) !important;
+  opacity: 0.92 !important;
+}
+
+/* Card hover effects */
+.task-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.task-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  border-color: #484f58;
+}
+
+/* Input base styles */
+.input-base {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.input-base:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(31,111,235,0.2);
+}
+.input-base::placeholder { color: var(--text-muted); }
+
+/* Textarea */
+textarea.input-base { resize: vertical; min-height: 80px; }
+
+/* Button base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--accent-blue);
+  color: white;
+  border-color: transparent;
+}
+.btn-primary:hover { background: var(--accent-blue-hover); }
+.btn-secondary {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+.btn-secondary:hover { background: #3d444d; border-color: #484f58; }
+.btn-danger {
+  background: transparent;
+  color: var(--accent-red);
+  border-color: var(--accent-red);
+}
+.btn-danger:hover { background: rgba(218,54,51,0.1); }
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: transparent;
+}
+.btn-ghost:hover { background: var(--bg-hover); color: var(--text-primary); }
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.15s ease;
+}
+
+/* Priority badges */
+.priority-low    { background: rgba(35,134,54,0.15);  color: #56d364; border: 1px solid rgba(35,134,54,0.3); }
+.priority-medium { background: rgba(210,153,34,0.15); color: #e3b341; border: 1px solid rgba(210,153,34,0.3); }
+.priority-high   { background: rgba(218,54,51,0.15);  color: #f85149; border: 1px solid rgba(218,54,51,0.3); }
+.priority-urgent { background: rgba(137,87,229,0.15); color: #bc8cff; border: 1px solid rgba(137,87,229,0.3); }
+
+/* Label colors */
+.label-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+}
+.tooltip::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #161b22;
+  color: var(--text-primary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 50;
+  border: 1px solid var(--border-color);
+  margin-bottom: 4px;
+}
+.tooltip:hover::after { opacity: 1; }
+
+/* Column drop target */
+.column-drop-active {
+  background: rgba(31,111,235,0.08) !important;
+  border-color: var(--accent-blue) !important;
+}
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.95) } to { opacity: 1; transform: scale(1) } }
+@keyframes pulse-border { 0%,100% { border-color: var(--accent-blue) } 50% { border-color: transparent } }
+
+.animate-fade-in  { animation: fadeIn 0.2s ease-out both; }
+.animate-slide-up { animation: slideUp 0.25s ease-out both; }
+.animate-scale-in { animation: scaleIn 0.15s ease-out both; }
+
+/* React Datepicker dark theme */
+.react-datepicker {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  font-family: 'Inter', sans-serif !important;
+  color: var(--text-primary) !important;
+}
+.react-datepicker__header { background: var(--bg-surface) !important; border-bottom: 1px solid var(--border-color) !important; }
+.react-datepicker__current-month, .react-datepicker__day-name, .react-datepicker__day { color: var(--text-primary) !important; }
+.react-datepicker__day:hover { background: var(--bg-hover) !important; border-radius: 4px !important; }
+.react-datepicker__day--selected { background: var(--accent-blue) !important; border-radius: 4px !important; }
+.react-datepicker__day--outside-month { color: var(--text-muted) !important; }
+.react-datepicker__navigation-icon::before { border-color: var(--text-secondary) !important; }
+
+/* Scrollable board */
+.board-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 100%;
+  padding-bottom: 8px;
+}
+
+/* Column container */
+.column-container {
+  min-height: 80px;
+  transition: background 0.15s ease;
+}
+
+/* Card count badge */
+.card-count {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+  border-radius: 999px;
+  padding: 1px 7px;
+  font-size: 12px;
+  font-weight: 600;
+}
